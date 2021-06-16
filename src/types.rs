@@ -75,7 +75,7 @@ def_primitive!(f64, read_double, write_double);
 // VAR INT AND VAR LONG
 macro_rules! def_varnum {
     ($nam: ident, $data_type: ty, $working_type: ty, $max_bytes: literal) => {
-        #[derive(Copy, Clone, PartialOrd, PartialEq, Default, Hash, Ord, Eq)]
+        #[derive(Copy, Clone, PartialOrd, PartialEq, Default, Hash, Ord, Eq, serde::Serialize, serde::Deserialize)]
         pub struct $nam(pub $data_type);
 
         impl Serialize for $nam {
@@ -495,7 +495,7 @@ impl<T> TestRandom for Option<T>
 }
 
 // SLOT
-#[derive(Debug, PartialEq, Clone)]
+#[derive(Debug, PartialEq, Clone, serde::Serialize, serde::Deserialize)]
 pub struct ItemStack {
     pub item_id: VarInt,
     pub item_count: i8,

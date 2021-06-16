@@ -6,7 +6,7 @@ use alloc::{string::{String, ToString}, borrow::ToOwned, fmt, vec::Vec, vec, for
 use crate::protocol::TestRandom;
 use crate::byte_order::{ProtoByteOrder, ByteOrder};
 
-#[derive(Clone, Debug, PartialEq)]
+#[derive(Clone, Debug, PartialEq, serde::Serialize, serde::Deserialize)]
 pub struct NamedTag {
     pub name: String,
     pub payload: Tag,
@@ -49,7 +49,7 @@ impl fmt::Display for NamedTag {
     }
 }
 
-#[derive(Clone, Debug, PartialEq)]
+#[derive(Clone, Debug, PartialEq, serde::Serialize, serde::Deserialize)]
 pub enum Tag {
     Byte(i8),
     Short(i16),
