@@ -12,16 +12,16 @@ readme = "README.md"
 
 [dependencies]
 serde_json = { version = "1.0", default-features = false, features = ["alloc"] }
-base64 = { version = "0.12.3", default-features = false, features = ["alloc"] }
-rand = { version = "0.7", optional = true }
+base64 = { version = "0.13.0", default-features = false, features = ["alloc"] }
+rand = { version = "0.8.4", optional = true }
 
 [dependencies.serde]
-version = "1.0.116"
+version = "1.0.126"
 features = [ "derive", "alloc" ]
 default-features = false
 
 [dev-dependencies]
-flate2 = "1.0.17"
+flate2 = "1.0.20"
 
 [features]
 default = [ "std", "bench", "v1_15_2", "v1_16_3" ]
