@@ -1916,7 +1916,7 @@ proto_varint_enum!(Hand,
     0x01 :: OffHand
 );
 
-proto_varint_enum!(WindowType,
+proto_varint_enum_serde!(WindowType,
     0x00 :: GenericOneRow,
     0x01 :: GenericTwoRow,
     0x02 :: GenericThreeRow,
