@@ -907,6 +907,21 @@ impl Deserialize for ChunkSectionPosition {
         let y = (raw & 0xFFFFF) as i32;
         let z = ((raw >> 20) & 0x3FFFFF) as i32;
         let x = ((raw >> 42) & 0x3FFFFF) as i32;
+        let y = if y <= 0x7FFFF {
+            y
+        } else {
+            y - 0xFFFFF - 1
+        };
+        let x = if x <= 0x1FFFFF {
+            x
+        } else {
+            x - 0x3FFFFF - 1 
+        };
+        let z = if z <= 0x1FFFFF {
+            z
+        } else {
+            z - 0x3FFFFF - 1
+        };
         Deserialized::ok(Self { x, y, z }, data)
     }
 }
