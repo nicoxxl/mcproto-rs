@@ -947,8 +947,8 @@ impl Serialize for MultiBlockChangeRecord {
     fn mc_serialize<S: Serializer>(&self, to: &mut S) -> SerializeResult {
         let raw = (self.block_id << 12)
             | (((self.rel_position.x as u64) & 0xF) << 8)
-            | (((self.rel_position.y as u64) & 0xF) << 4)
-            | ((self.rel_position.z as u64) & 0xF);
+            | ((self.rel_position.y as u64) & 0xF)
+            | (((self.rel_position.z as u64) & 0xF) << 4);
         let raw = VarLong(raw as i64);
         to.serialize_other(&raw)
     }
@@ -960,8 +960,8 @@ impl Deserialize for MultiBlockChangeRecord {
         let raw = raw.0 as u64;
         let block_id = raw >> 12;
         let x = ((raw >> 8) & 0xF) as i8;
-        let y = ((raw >> 4) & 0xF) as i8;
-        let z = (raw & 0xF) as i8;
+        let y = (raw & 0xF) as i8;
+        let z = ((raw >> 4) & 0xF) as i8;
         let rel_position = (x, y, z).into();
         Deserialized::ok(Self { block_id, rel_position }, data)
     }
